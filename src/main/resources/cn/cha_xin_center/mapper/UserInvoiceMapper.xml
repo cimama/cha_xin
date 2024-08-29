@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.cha_xin_center.mapper.UserInvoiceMapper">
+    <insert id="addUserInvoiceByUid" useGeneratedKeys="true" parameterType="cn.cha_xin_center.entity.UserInvoice"
+            keyProperty="id">
+        insert into user_invoice (type, unit_name, id_num, default_info, user_id)
+        values (#{type}, #{unitName}, #{idNum}, #{defaultInfo}, #{userId})
+    </insert>
+    <select id="findDefaultInvoiceByUserIdAndDefaultInfo" parameterType="map" resultType="cn.cha_xin_center.entity.UserInvoice">
+        SELECT id FROM user_invoice WHERE user_id = #{userId} AND default_info = #{defaultInfo} LIMIT 1
+    </select>
+    <update id="updateDefaultInfoById" parameterType="map">
+        UPDATE user_invoice
+        SET default_info = #{defaultInfo}
+        WHERE user_id = #{userId}
+    </update>
+    <select id="findUserInvoiceByUid" parameterType="Integer" resultType="cn.cha_xin_center.entity.UserInvoice">
+        SELECT * FROM user_invoice WHERE user_id = #{userId}
+    </select>
+    <delete id="deleteUserInvoiceById" parameterType="map">
+        DELETE FROM user_invoice WHERE user_id = #{userId} AND id = #{id}
+    </delete>
+    <select id="findUserInvoiceById" parameterType="Integer" resultType="cn.cha_xin_center.entity.UserInvoice">
+        SELECT * FROM user_invoice WHERE id = #{id}
+    </select>
+
+    <update id="updateUserInvoice" parameterType="cn.cha_xin_center.entity.UserInvoice">
+        UPDATE user_invoice
+        SET
+            type = #{type},
+            unit_name = #{unitName},
+            id_num = #{idNum},
+            default_info = #{defaultInfo}
+        WHERE id = #{id} AND user_id = #{userId}
+    </update>
+</mapper>

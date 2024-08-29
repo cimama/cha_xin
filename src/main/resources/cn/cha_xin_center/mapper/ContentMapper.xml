@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cha_xin_center.mapper.ContentMapper">
+    <insert id="addContent" parameterType="cn.cha_xin_center.entity.Content" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO content
+        (`project_name`,`project_name_en`,`targets_project`,`targets_result`,`targets_other`,`scope`,`novelty_point`,`essential`,`novelty_term`,`knowledge_paper`,`reference_doc`,`file`,`user_id` )
+        VALUES
+            (  #{projectName}, #{projectNameEn}, #{targetsProject}, #{targetsResult}, #{targetsOther}, #{scope}, #{noveltyPoint}, #{essential}, #{noveltyTerm}, #{knowledgePaper}, #{referenceDoc}, #{file}, #{userId}  )
+    </insert>
+
+    <select id="getContentByRandomId" parameterType="int" resultType="cn.cha_xin_center.entity.Content">
+        SELECT * FROM content WHERE random_id = #{randomId}
+    </select>
+</mapper>

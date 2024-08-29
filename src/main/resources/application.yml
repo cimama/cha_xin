@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/chaxin?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: 123456
+      database: 0
+  main:
+    allow-circular-references: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 30MB
+
+logging:
+  level:
+    cn.cha_xin_center.mapper: TRACE
+mybatis:
+  mapper-locations: classpath*:mapper/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+file:
+  upload:
+    #文件存放路径
+    dir: classpath:/static/upload
+    #文件不允许上传文件类型
+    un-allow: exe,dll
+
+
+minio:
+  endpoint: http://103.164.63.63:9000 # Minio服务所在地址，改成自己的minIO服务地址
+  bucketName: chaxin # 存储桶名称（可改）
+  accessKey: chaxin # minIO账号
+  secretKey: 0RCnzmkM8B # minIO密码
+

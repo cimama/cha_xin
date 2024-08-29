@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cha_xin_center.mapper.UsersMapper">
+    <insert  id="addUser" useGeneratedKeys="true" parameterType="cn.cha_xin_center.entity.Users" keyProperty="id">
+        INSERT INTO users (username, password, phone, create_time, update_time)
+        VALUES (#{username}, #{password}, #{phone}, #{createTime}, #{updateTime})
+    </insert>
+    <select id="findUserByPhone" parameterType="String" resultType="cn.cha_xin_center.entity.dto.UserDto">
+        SELECT id , username ,password ,phone from users where phone = #{phone} limit 1
+    </select>
+</mapper>

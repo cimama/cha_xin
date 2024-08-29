@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.cha_xin_center.mapper.UserAddressMapper">
+    <insert id="addUserAddressByUid" useGeneratedKeys="true" parameterType="cn.cha_xin_center.entity.UserAddress"
+            keyProperty="id">
+        insert into user_address (type, unit_name, id_num, default_info, user_id)
+        values (#{type}, #{unitName}, #{idNum}, #{defaultInfo}, #{userId})
+    </insert>
+    <select id="findDefaultAddressByUserIdAndDefaultInfo" parameterType="map" resultType="cn.cha_xin_center.entity.UserAddress">
+        SELECT id FROM user_address WHERE user_id = #{userId} AND default_info = #{defaultInfo} LIMIT 1
+    </select>
+    <update id="updateDefaultInfoById" parameterType="map">
+        UPDATE user_address
+        SET default_info = #{defaultInfo}
+        WHERE user_id = #{userId}
+    </update>
+    <select id="findUserAddressByUid" parameterType="Integer" resultType="cn.cha_xin_center.entity.UserAddress">
+        SELECT * FROM user_address WHERE user_id = #{userId}
+    </select>
+    <delete id="deleteUserAddressById" parameterType="map">
+        DELETE FROM user_address WHERE user_id = #{userId} AND id = #{id}
+    </delete>
+    <select id="findUserAddressById" parameterType="Integer" resultType="cn.cha_xin_center.entity.UserAddress">
+        SELECT * FROM user_address WHERE id = #{id}
+    </select>
+
+    <update id="updateUserAddress" parameterType="cn.cha_xin_center.entity.UserAddress">
+        UPDATE user_address
+        SET
+            type = #{type},
+            unit_name = #{unitName},
+            id_num = #{idNum},
+            default_info = #{defaultInfo}
+        WHERE id = #{id} AND user_id = #{userId}
+    </update>
+</mapper>
